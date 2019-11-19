@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  proxy:
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - "80:80"
+      #- "443:443" uncomment this if you want to use SSL/HTTPS as well
+    volumes:
+      #- ./certs:/etc/nginx/certs uncomment this if you want to use SSL/HTTPS as well
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
